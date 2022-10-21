@@ -1,0 +1,16 @@
+import requests
+
+API_link = "https://api.telegram.org/bot5546063324:AAH-yvBX6YUKIVue4tySjMgC6iFDg4lYDk8"
+updates = requests.get(API_link + "/getUpdates?offset=-1").json()
+
+print(updates)
+
+message = updates["result"][0]["message"]
+
+chat_id = message["from"]["id"]
+text = message["text"]
+first_name = message["from"]["first_name"]
+language_code = message["from"]["language_code"]
+#last_name = message["from"]["last_name"]
+
+sent_message = requests.get(API_link + f"/sendMessage?chat_id={chat_id}&text=Привет, {first_name} ты написал {text}, твой ID {chat_id}, говоришь на {language_code} языке ")
